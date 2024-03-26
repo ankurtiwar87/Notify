@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "709591316194",
+    "project_id": "notifycampus-ae80b",
+    "storage_bucket": "notifycampus-ae80b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709591316194:android:a9ef1299d3ee6cb57e90bb",
+        "android_client_info": {
+          "package_name": "com.ankur.admin_notifycampus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS_5XKRwNzYeDxrMHvtKnKbL7dmzjog1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709591316194:android:38670e0d44ff951d7e90bb",
+        "android_client_info": {
+          "package_name": "com.example.notify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS_5XKRwNzYeDxrMHvtKnKbL7dmzjog1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
