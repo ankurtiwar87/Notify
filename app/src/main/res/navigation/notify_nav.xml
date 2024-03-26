@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notify_nav"
+    app:startDestination="@id/noticeFragment">
+
+    <fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.example.notify.ui.Fragments.NoticeFragment"
+        android:label="fragment_notice"
+        tools:layout="@layout/fragment_notice" />
+    <fragment
+        android:id="@+id/facultyFragment"
+        android:name="com.example.notify.ui.Fragments.FacultyFragment"
+        android:label="fragment_faculty"
+        tools:layout="@layout/fragment_faculty" />
+    <fragment
+        android:id="@+id/about_Us_Fragment"
+        android:name="com.example.notify.ui.Fragments.AboutUsFragment"
+        android:label="fragment_about__us_"
+        tools:layout="@layout/fragment_about__us_" />
+</navigation>

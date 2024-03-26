@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- half_hemisphere.xml -->
+<shape  android:shape="rectangle"  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:bottomLeftRadius="@dimen/_200sdp" android:bottomRightRadius="@dimen/_200sdp"/>
+    <solid android:color="@color/color_primary"/>
+    <gradient android:centerColor="@color/colorAccent" />
+
+</shape>
