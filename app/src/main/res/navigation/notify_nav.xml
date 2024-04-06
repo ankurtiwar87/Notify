@@ -9,15 +9,49 @@
         android:id="@+id/noticeFragment"
         android:name="com.example.notify.ui.Fragments.NoticeFragment"
         android:label="fragment_notice"
-        tools:layout="@layout/fragment_notice" />
+        tools:layout="@layout/fragment_notice" >
+        <action
+            android:id="@+id/action_noticeFragment_to_viewNoticeFragment"
+            app:destination="@id/viewNoticeFragment" />
+        <argument
+            android:name="collection"
+            app:argType="string"
+            />
+    </fragment>
     <fragment
         android:id="@+id/facultyFragment"
         android:name="com.example.notify.ui.Fragments.FacultyFragment"
         android:label="fragment_faculty"
-        tools:layout="@layout/fragment_faculty" />
+        tools:layout="@layout/fragment_faculty" >
+        <action
+            android:id="@+id/action_facultyFragment_to_viewFacultyFragment"
+            app:destination="@id/viewFacultyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/about_Us_Fragment"
         android:name="com.example.notify.ui.Fragments.AboutUsFragment"
         android:label="fragment_about__us_"
         tools:layout="@layout/fragment_about__us_" />
+    <fragment
+        android:id="@+id/viewNoticeFragment"
+        android:name="com.example.notify.ui.Fragments.ViewNoticeFragment"
+        android:label="fragment_view_notice"
+        tools:layout="@layout/fragment_view_notice" >
+        <action
+            android:id="@+id/action_viewNoticeFragment_to_noticeFragment"
+            app:destination="@id/noticeFragment" />
+        <argument
+            android:name="collection"
+            app:argType="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/viewFacultyFragment"
+        android:name="com.example.notify.ui.Fragments.ViewFacultyFragment"
+        android:label="fragment_view_faculty"
+        tools:layout="@layout/fragment_view_faculty" >
+        <action
+            android:id="@+id/action_viewFacultyFragment_to_facultyFragment"
+            app:destination="@id/facultyFragment" />
+    </fragment>
 </navigation>

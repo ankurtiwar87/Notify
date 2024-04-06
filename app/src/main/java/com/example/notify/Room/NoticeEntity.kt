@@ -1,9 +1,13 @@
-package com.example.notify.models
+package com.example.notify.Room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-data class NoticeModel(
+@Entity(tableName = "notices")
+data class NoticeEntity(
+
+    @PrimaryKey(autoGenerate = true)
+    val roomId:Int=0,
     val id :String ? = null,
     val title:String?=null,
     val desc:String?=null,
