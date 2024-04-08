@@ -58,7 +58,7 @@ class AboutUsFragment : Fragment() {
 
         binding.feedback.setOnClickListener {
 
-            val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.maverickbits.statussaverpro&pcampaignid=web_share")
+            val uri = Uri.parse("https://forms.gle/xsJ3QiVFXi5qVSk56")
             val iRate = Intent(Intent.ACTION_VIEW,uri)
             startActivity(iRate)
         }
