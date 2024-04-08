@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_facultyFragment_to_viewFacultyFragment"
             app:destination="@id/viewFacultyFragment" />
+        <argument
+            android:name="collection"
+            app:argType="string"
+            />
+
+
     </fragment>
     <fragment
         android:id="@+id/about_Us_Fragment"
@@ -53,5 +59,9 @@
         <action
             android:id="@+id/action_viewFacultyFragment_to_facultyFragment"
             app:destination="@id/facultyFragment" />
+        <argument
+            android:name="collection"
+            app:argType="string"
+            />
     </fragment>
 </navigation>

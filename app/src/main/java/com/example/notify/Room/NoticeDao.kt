@@ -32,4 +32,25 @@ interface NoticeDao {
     @Query("SELECT * FROM notices WHERE collectionName = :collectionName")
     suspend fun getAllNotices(collectionName: String):List<NoticeEntity>
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertFaculty(faculty: FacultyEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdateFaculty(faculty: List<FacultyEntity>)
+
+    // Get a faculty by its ID
+    @Query("SELECT * FROM faculty WHERE id = :id")
+    suspend fun getFacultyById(id: String): FacultyEntity?
+
+    @Update
+    suspend fun updateFaculty(faculty: FacultyEntity)
+
+    @Delete
+    suspend fun deleteFaculty(faculty: FacultyEntity)
+    @Delete
+    suspend fun deleteFaculty(faculty: List<FacultyEntity>)
+
+    @Query("SELECT * FROM faculty WHERE year = :collectionName")
+    suspend fun getAllFaculty(collectionName: String):List<FacultyEntity>
+
 }

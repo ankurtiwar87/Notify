@@ -1,0 +1,11 @@
+<!-- res/xml/file_paths.xml -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shared files in app's internal storage -->
+    <files-path name="shared_files" path="shared/" />
+    <!-- Shared files in app's cache directory -->
+    <cache-path name="cache_files" path="." />
+    <!-- Shared files in app's external storage -->
+    <external-path name="external_files" path="." />
+    <!-- Shared files in specific directories within app's external storage -->
+    <external-path name="custom_directory" path="custom_directory/" />
+</paths>

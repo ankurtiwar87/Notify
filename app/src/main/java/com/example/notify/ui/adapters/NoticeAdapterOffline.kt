@@ -49,19 +49,19 @@ class NoticeAdapterOffline(private val context: Context, val list: List<NoticeEn
         holder.binding.Title.text=currentItem.title
         holder.binding.dateTextView.text=currentItem.date
         holder.binding.timeTextView.text=currentItem.time
-
-        holder.binding.downloadButton.setOnClickListener {
-            val downloadUrl = currentItem.docUrl
-
-            // Check if the download URL is present
-            if (downloadUrl != null && downloadUrl.isNotEmpty()) {
-                // Download the document
-                downloadDocument(downloadUrl)
-            } else {
-                // Display a toast message indicating that no document is present
-                Toast.makeText(context, "No document available", Toast.LENGTH_SHORT).show()
-            }
-        }
+        holder.binding.downloadButton.visibility=View.GONE
+//        holder.binding.downloadButton.setOnClickListener {
+//            val downloadUrl = currentItem.docUrl
+//
+//            // Check if the download URL is present
+//            if (downloadUrl != null && downloadUrl.isNotEmpty()) {
+//                // Download the document
+//                downloadDocument(downloadUrl)
+//            } else {
+//                // Display a toast message indicating that no document is present
+//                Toast.makeText(context, "No document available", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         // Inside your RecyclerView or ListView adapter's onBindViewHolder method
         val maxLength = 100 // Max length of text to display initially

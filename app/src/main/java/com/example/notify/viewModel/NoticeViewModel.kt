@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Entity
+import com.example.notify.Room.FacultyEntity
 import com.example.notify.Room.NoticeEntity
+import com.example.notify.models.FacultyModel
 
 import com.example.notify.models.NoticeModel
 import com.example.notify.repository.NoticeRepository
@@ -28,6 +30,19 @@ class NoticeViewModel(private val noticeRepository: NoticeRepository) :ViewModel
             noticeRepository.getOfflineNotices(collection)
         }
     }
+    suspend fun fetchFaculty(collection: String):List<FacultyModel>{
+        return withContext(Dispatchers.IO){
+            noticeRepository.getFaculty(collection)
+        }
+    }
+    suspend fun getOfflineFaculty(collection: String):List<FacultyEntity>{
+        return withContext(Dispatchers.IO){
+            noticeRepository.getOfflineFaculty(collection)
+        }
+    }
+
+
+
 
 
 

@@ -1,11 +1,15 @@
 package com.example.notify.ui.adapters
 
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -22,15 +26,6 @@ class NoticeAdapter(private val context: Context, val list: List<NoticeModel>)
         val binding =NoticeUiBinding.bind(itemView)
     }
 
-//    fun removeItem(position: Int) {
-//        list.removeAt(position)
-//        notifyItemRemoved(position)
-//    }
-//
-//    fun restoreItem(item: NoticeModel, position: Int) {
-//        list.add(position, item)
-//        notifyItemInserted(position)
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RemoveNoticeViewHolder {
         return RemoveNoticeViewHolder(LayoutInflater.from(context).inflate(R.layout.notice_ui,parent,false))
@@ -51,13 +46,12 @@ class NoticeAdapter(private val context: Context, val list: List<NoticeModel>)
 
         holder.binding.downloadButton.setOnClickListener {
             val downloadUrl = currentItem.docUrl
-
-            // Check if the download URL is present
-            if (downloadUrl != null && downloadUrl.isNotEmpty()) {
+            Log.d("URl of Doc ","url is $downloadUrl")
+            if (!downloadUrl.isNullOrEmpty()) {
                 // Download the document
                 downloadDocument(downloadUrl)
             } else {
-                // Display a toast message indicating that no document is present
+                // Handle the case when docUrl is null or empty
                 Toast.makeText(context, "No document available", Toast.LENGTH_SHORT).show()
             }
         }
@@ -98,17 +92,19 @@ class NoticeAdapter(private val context: Context, val list: List<NoticeModel>)
         val storageRef = storage.getReferenceFromUrl(downloadUrl)
 
         // Create a local file to save the document
-        val localFile = File.createTempFile("document", "pdf")
+        val localFile = File.createTempFile("document", "")
 
         // Download the document to the local file
         storageRef.getFile(localFile)
             .addOnSuccessListener {
                 // Document downloaded successfully
-                // Here, you can open the downloaded document using an appropriate application
-                // For example, you can use Intent to open a PDF viewer
+                // Get the MIME type based on the file extension
+                val mimeType = getMimeType(localFile)
+
+                // Open the downloaded document using an appropriate application
                 val uri = FileProvider.getUriForFile(context, context.packageName + ".provider", localFile)
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.setDataAndType(uri, "application/pdf")
+                intent.setDataAndType(uri, mimeType)
                 intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                 context.startActivity(intent)
             }
@@ -118,5 +114,51 @@ class NoticeAdapter(private val context: Context, val list: List<NoticeModel>)
                 // Display a toast message indicating the error
                 Toast.makeText(context, "Error downloading document", Toast.LENGTH_SHORT).show()
             }
+    }
+
+  private  val DIRECTORY = Environment.DIRECTORY_DOWNLOADS
+
+//    private fun downloadDocument(context: Context, downloadUrl: String) {
+//        val uri = Uri.parse(downloadUrl)
+//        val request = DownloadManager.Request(uri)
+//
+//        // Get the file name from the download URL
+//        val fileName = getFileNameFromUrl(downloadUrl)
+//        // Set the title of the download notification
+//        request.setTitle("$fileName")
+//
+//        // Set the description of the download notification
+//        request.setDescription("Downloading...")
+//
+//
+//
+//        // Set the destination directory and file name for the downloaded file
+//        request.setDestinationInExternalFilesDir(context, DIRECTORY, fileName)
+//
+//        // Get the download service and enqueue the download request
+//        val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+//        val downloadId = downloadManager.enqueue(request)
+//
+//        // Show a toast message to indicate that the download has started
+//        Toast.makeText(context, "Download started", Toast.LENGTH_SHORT).show()
+//    }
+
+    // Function to extract file name from URL
+    private fun getFileNameFromUrl(url: String): String {
+        // Get the file name from the URL
+        val fileNameStartIndex = url.lastIndexOf('/') + 1
+        val fileName = url.substring(fileNameStartIndex)
+
+        // Extract file extension from the file name
+        val extensionIndex = fileName.lastIndexOf('.')
+        val extension = if (extensionIndex != -1) fileName.substring(extensionIndex + 1) else ""
+
+        // Return a unique file name with extension
+        return "document.${extension}"
+    }
+
+    private fun getMimeType(file: File): String {
+        val extension = MimeTypeMap.getFileExtensionFromUrl(file.absolutePath)
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension) ?: "*/*"
     }
 }

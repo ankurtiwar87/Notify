@@ -1,60 +1,81 @@
 package com.example.notify.ui.Fragments
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.notify.R
+import com.example.notify.databinding.FragmentNoticeBinding
+import com.example.notify.databinding.FragmentViewFacultyBinding
+import com.example.notify.ui.Activity.MainActivity
+import com.example.notify.ui.adapters.FacultyAdapter
+import com.example.notify.ui.adapters.FacultyAdapterOffline
+import com.example.notify.ui.adapters.NoticeAdapter
+import com.example.notify.ui.adapters.NoticeAdapterOffline
+import com.example.notify.viewModel.NoticeViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewFacultyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ViewFacultyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentViewFacultyBinding?=null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: NoticeViewModel
 
+
+    private val args:ViewNoticeFragmentArgs by navArgs()
+    private lateinit var collectionName:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_faculty, container, false)
-    }
+        _binding=FragmentViewFacultyBinding.inflate(inflater,container,false)
+        viewModel=(activity as MainActivity).viewModel
+        collectionName=args.collection
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ViewFacultyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ViewFacultyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val isConnected = isNetworkAvailable(connectivityManager)
+            if (isConnected) {
+                val list = viewModel.fetchFaculty(collectionName)
+                withContext(Dispatchers.Main) {
+                    binding.recyclerView.adapter = FacultyAdapter(requireContext(), list)
+                }
+            } else {
+                val list = viewModel.getOfflineFaculty(collectionName)
+                withContext(Dispatchers.Main) {
+                    binding.recyclerView.adapter = FacultyAdapterOffline(requireContext(), list)
                 }
             }
+        }
+        return binding.root
     }
+
+
+
+    private fun isNetworkAvailable(connectivityManager: ConnectivityManager): Boolean {
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+
 }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.notify.models.NoticeModel
 
-@Database(entities = [NoticeEntity::class], version = 1, exportSchema = false)
+@Database(entities = [NoticeEntity::class,FacultyEntity::class], version = 1, exportSchema = false)
 abstract class NoticeDatabase :RoomDatabase() {
 
     abstract fun getNoticeDao(): NoticeDao

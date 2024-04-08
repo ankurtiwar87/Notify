@@ -8,17 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.notify.R
 import com.example.notify.databinding.FragmentNoticeBinding
+import com.example.notify.ui.Activity.MainActivity
 import com.example.notify.viewModel.NoticeViewModel
 
 class NoticeFragment : Fragment() {
 
     private var _binding:FragmentNoticeBinding?=null
     private val binding get() = _binding!!
-    private lateinit var viewModel: NoticeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         _binding= FragmentNoticeBinding.inflate(inflater,container,false)
 

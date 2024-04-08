@@ -100,4 +100,7 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+
 }
