@@ -1,5 +1,6 @@
 package com.example.notify.ui.Fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,12 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.notify.LoginAndSignIn.LoginActivity
 import com.example.notify.databinding.FragmentAboutUsBinding
 import com.example.notify.ui.Activity.AboutActivity
-import com.example.notify.ui.Activity.MainActivity
+import com.example.notify.ui.Activity.NotifyMainActivity
 import com.example.notify.ui.Activity.PrivacyPolicyActivity
 import com.example.notify.viewModel.NoticeViewModel
 
+private const val PREF_NAME = "LoginPrefs"
+private const val KEY_USERNAME = "username"
+private const val KEY_PASSWORD = "password"
+private const val KEY_ROLE = "role"
 
 class AboutUsFragment : Fragment() {
 
@@ -26,7 +32,7 @@ class AboutUsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAboutUsBinding.inflate(inflater,container,false)
 
-        viewModel=(activity as MainActivity).viewModel
+        viewModel=(activity as NotifyMainActivity).viewModel
 
         binding.cardAbout.setOnClickListener{
 
@@ -63,10 +69,16 @@ class AboutUsFragment : Fragment() {
             startActivity(iRate)
         }
 
-//        binding.cardLogout.setOnClickListener {
-//
-//            Toast.makeText(requireContext(),"Coming Soon", Toast.LENGTH_SHORT ).show()
-//        }
+        binding.logout.setOnClickListener {
+
+            val sharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+            val intent=Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
 
         return binding.root
 

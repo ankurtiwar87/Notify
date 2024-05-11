@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.notify.R
 import com.example.notify.databinding.FragmentFacultyBinding
-import com.example.notify.databinding.FragmentNoticeBinding
-import com.example.notify.ui.Activity.MainActivity
+import com.example.notify.ui.Activity.NotifyMainActivity
 import com.example.notify.viewModel.NoticeViewModel
 
 class FacultyFragment : Fragment() {
@@ -24,7 +22,7 @@ class FacultyFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding=FragmentFacultyBinding.inflate(inflater,container,false)
-        viewModel=(activity as MainActivity).viewModel
+        viewModel=(activity as NotifyMainActivity).viewModel
         binding.cardView1.setOnClickListener {
             val action=FacultyFragmentDirections.actionFacultyFragmentToViewFacultyFragment(
                 collection = "1"

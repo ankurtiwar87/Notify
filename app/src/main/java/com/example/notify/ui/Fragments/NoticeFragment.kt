@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.notify.R
 import com.example.notify.databinding.FragmentNoticeBinding
-import com.example.notify.ui.Activity.MainActivity
-import com.example.notify.viewModel.NoticeViewModel
 
 class NoticeFragment : Fragment() {
 

@@ -1,6 +1,5 @@
 package com.example.notify.ui.Fragments
 
-import NoticeViewModelFactory
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -10,15 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.example.notify.Room.NoticeDatabase
 import com.example.notify.databinding.FragmentViewNoticeBinding
-import com.example.notify.repository.NoticeRepository
-import com.example.notify.ui.Activity.MainActivity
+import com.example.notify.ui.Activity.NotifyMainActivity
 import com.example.notify.ui.adapters.NoticeAdapter
 import com.example.notify.ui.adapters.NoticeAdapterOffline
 import com.example.notify.viewModel.NoticeViewModel
@@ -38,7 +32,7 @@ class ViewNoticeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as NotifyMainActivity).viewModel
         collectionName =args.collection
         Log.d(TAG,"collectionName $collectionName")
         _binding=FragmentViewNoticeBinding.inflate(inflater,container,false)

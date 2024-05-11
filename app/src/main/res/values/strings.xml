@@ -1,5 +1,35 @@
 <resources>
     <string name="app_name">Notify</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="session">
+        <item>2019-2023</item>
+        <item>2020-2024</item>
+        <item>2021-2025</item>
+        <item>2022-2026</item>
+        <item>2023-2027</item>
+        <item>2024-2028</item>
+        <item>2025-2029</item>
+    </string-array>
+
+    <string-array name="role">
+        <item>Select</item>
+        <item>Admin</item>
+        <item>Developer</item>
+        <item>Student</item>
+    </string-array>
+
+    <string-array name="year">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="department">
+        <item>Aryabhatt Block</item>
+        <item>Raman Block</item>
+        <item>Kalpana Chawala Bloack</item>
+        <item>Bhabha Block</item>
+    </string-array>
 </resources>

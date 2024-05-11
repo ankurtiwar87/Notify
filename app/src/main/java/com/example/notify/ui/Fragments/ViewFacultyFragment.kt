@@ -10,14 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.example.notify.R
-import com.example.notify.databinding.FragmentNoticeBinding
 import com.example.notify.databinding.FragmentViewFacultyBinding
-import com.example.notify.ui.Activity.MainActivity
+import com.example.notify.ui.Activity.NotifyMainActivity
 import com.example.notify.ui.adapters.FacultyAdapter
 import com.example.notify.ui.adapters.FacultyAdapterOffline
-import com.example.notify.ui.adapters.NoticeAdapter
-import com.example.notify.ui.adapters.NoticeAdapterOffline
 import com.example.notify.viewModel.NoticeViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +34,7 @@ class ViewFacultyFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding=FragmentViewFacultyBinding.inflate(inflater,container,false)
-        viewModel=(activity as MainActivity).viewModel
+        viewModel=(activity as NotifyMainActivity).viewModel
         collectionName=args.collection
 
 

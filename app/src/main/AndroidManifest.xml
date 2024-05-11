@@ -4,7 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -17,20 +24,76 @@
         android:theme="@style/Theme.Notify"
         tools:targetApi="31">
         <activity
-            android:name=".ui.Activity.PrivacyPolicyActivity"
+            android:name="com.example.NotifyAdmin.Activities.DeveloperFeedbackActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Activity.AboutActivity"
+            android:name="com.example.notify.LoginAndSignIn.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Activity.MainActivity"
+            android:name="com.example.notify.LoginAndSignIn.LoginActivity"
+            android:exported="false" />
+
+        <service
+            android:name="com.ankur.admin_notifycampus.pushNotification.FirebaseService"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".util.FirebaseService2"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.ankur.admin_notifycampus.pushNotification.Update_Time_Table"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Years.YearActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Years.YearTemplate"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Sessions.SessionTemplate"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Sessions.Session"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Activities.AddFaculty"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Activities.AddNotice"
+            android:exported="false" />
+        <activity
+            android:name="com.ankur.admin_notifycampus.Activities.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Activity.SplashScrren"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- FileProvider configuration -->
+        </activity>
+        <activity
+            android:name=".ui.Activity.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Activity.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Activity.NotifyMainActivity"
+            android:exported="false"></activity> <!-- FileProvider configuration -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -39,6 +102,9 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS_1"
+                android:resource="@xml/file_paths1" />
         </provider>
     </application>
 
